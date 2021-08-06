@@ -3,47 +3,13 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        {# Run `composer require symfony/webpack-encore-bundle`
-           and uncomment the following Encore helpers to start using Symfony UX #}
+        <!--
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+        -->
         {% block stylesheets %}
-            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-            {#{{ encore_entry_link_tags('app') }}#}
-            <style>
-                html, body
-                {
-                    font-family: 'Montserrat', sans-serif;
-                }
-                .alert
-                {
-                    padding: 10px;
-                    color: white;
-                    text-align: center;
-                    margin: 0;
-                    border: none;
-                    border-radius: 0;
-                }
-                .alert-success
-                {
-                    background-color: green;
-                }
-                .alert-info
-                {
-                    background-color: blue;
-                }
-                .alert-error
-                {
-                    background-color: red;
-                }
-                /*
-                .form-error-icon
-                {
-                    background-color: red;
-                }
-                */
-            </style>
+            {{ encore_entry_link_tags('app') }}
         {% endblock %}
     </head>
     <body>
@@ -58,9 +24,7 @@
         {{ include('layouts/partials/_footer.html.twig') }}
 
         {% block javascripts %}
-            {#{{ encore_entry_script_tags('app') }}#}
-            <!-- JavaScript Bundle with Popper -->
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+            {{ encore_entry_script_tags('app') }}
         {% endblock %}
     </body>
 </html>
