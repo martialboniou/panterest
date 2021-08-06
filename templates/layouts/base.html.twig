@@ -6,12 +6,16 @@
         {# Run `composer require symfony/webpack-encore-bundle`
            and uncomment the following Encore helpers to start using Symfony UX #}
         {% block stylesheets %}
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
             {#{{ encore_entry_link_tags('app') }}#}
             <style>
                 .alert {
                     padding: 10px;
                     color: white;
                     text-align: center;
+                    margin: 0;
+                    border: none;
+                    border-radius: 0;
                 }
 
                 .alert-success {
@@ -25,23 +29,22 @@
                 }
             </style>
         {% endblock %}
-
-        {% block javascripts %}
-            {#{{ encore_entry_script_tags('app') }}#}
-        {% endblock %}
     </head>
     <body>
         {{ include('layouts/partials/_flash_messages.html.twig') }}
 
-        <nav>
-            <ul>
-                <li><a href="{{ path('app_home') }}">Home</a></li>
-                <li><a href="{{ path('app_pins_create') }}">New Pin</a></li>
-            </ul>
-        </nav>
+        {{ include('layouts/partials/_nav.html.twig') }}
 
+        <main role="main" class="container">
+            {% block body %}{% endblock %}
+        </main>
 
+        {{ include('layouts/partials/_footer.html.twig') }}
 
-        {% block body %}{% endblock %}
+        {% block javascripts %}
+            {#{{ encore_entry_script_tags('app') }}#}
+            <!-- JavaScript Bundle with Popper -->
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+        {% endblock %}
     </body>
 </html>
