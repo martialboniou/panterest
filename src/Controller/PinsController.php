@@ -73,7 +73,7 @@ class PinsController extends AbstractController
             compact('form', 'pin'));
     }
 
-    #[Route('/pins/{id<[0-9]+>}/delete', name: 'app_pins_delete', methods: ['DELETE'])]
+    #[Route('/pins/{id<[0-9]+>}', name: 'app_pins_delete', methods: ['DELETE'])]
     public function delete(
         Pin $pin,
         Request $request,
