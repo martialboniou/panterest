@@ -20,4 +20,9 @@ Test with the following command at the project root:
 
 Put placeholders in `asset` and use `npm install file-loader@"^6.0.0" --save-dev` with a `copyFiles` configuration in `webpack.config.js`. `manifest.json` contains the alias for `asset()`.
 
+Part 6
+------
 
+Use `symfony console security:encode-password` to encode the password.
+
+Drop database with `symfony console d:d:d --force` in *dev* when you have a migration with non-null foreign key.
