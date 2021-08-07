@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Image;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class PinType extends AbstractType
@@ -20,6 +21,10 @@ class PinType extends AbstractType
                 'allow_delete' => true,
                 'download_label' => '...',
                 'download_uri' => false,
+                'imagine_pattern' => 'squared_thumbnail_small',
+                /*'constraints' => [
+                    new Image(['maxSize' => '1M'])
+                ],*/
             ])
             ->add('title')
             ->add('description')
