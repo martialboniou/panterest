@@ -26,10 +26,8 @@
                         </a>
                     </h2>
                     <p class="ps-3 pb-3 text-muted"><small>
-                            Submitted by [OWNER FULL NAME]
-                            {# pin.createdAt | ago #}
+                            Submitted by {{ pin.user.fullName }}
                         </small></p>
-
                     </article>
                 </div>
             {% endfor %}

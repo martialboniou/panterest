@@ -26,3 +26,10 @@ Part 6
 Use `symfony console security:encode-password` to encode the password.
 
 Drop database with `symfony console d:d:d --force` in *dev* when you have a migration with non-null foreign key.
+
+`symfony console psysh` is very useful to access our Symfony project by using the CLI:
+- `use App\Entity\{User, Pin}`;
+- `$em = $container->get('doctrine')->getManager();`;
+- `$userRepo = $em->getRepository('App:User');` (or `(User::class)` as argument);
+- `$user = $userRepo->find(2)` (to get the second user ie with `id` at 2);
+- `$user2 = $userRepo->findOneBy(['email' => 'johndoe@example.com']);`;
