@@ -2,8 +2,7 @@
 @import 'shared/variables';
 @import '~bootstrap';  /// or @import '~bootstrap/scss/bootstrap.scss'; if no JS import
 
-body
-{
+body {
     font-family: $primary-font, sans-serif;
 }
 
@@ -44,13 +43,21 @@ section {
 
 .vich-image {
     .form-check {
-        @extend .mt-3
+        @extend .mt-3;
     }
     img {
         @extend .mb-2;
         @extend .rounded;
         @extend .shadow;
         @extend .img-thumbnail;
+    }
+}
+
+.pin img {
+    transition: transform 0.3s ease-out;
+
+    &:hover {
+        transform: scale(1.075);
     }
 }
 

@@ -16,4 +16,8 @@ Check the method in a Type with `$options['method'] === 'PUT'` in `buildForm()` 
 
 `pecl install imagick` (install `imagemagick` & `pcre2`; I add to link the header manually `ln -s /opt/homebrew/Cellar/pcre2/10.37_1/include/pcre2.h /opt/homebrew/Cellar/php/8.0.9/include/php/ext/pcre` for the build and restart Apache); en production, faire un *queue* avec Symfony Messenger.
 Test with the following command at the project root:
-`sc liip:imagine:cache:resolve uploads/pins/640x360-610e77314fe27642699988.jpg --filter=imagick`
+`sc liip:imagine:cache:resolve uploads/pins/640x360-610e77314fe27642699988.jpg --filter=imagick`.
+
+Put placeholders in `asset` and use `npm install file-loader@"^6.0.0" --save-dev` with a `copyFiles` configuration in `webpack.config.js`. `manifest.json` contains the alias for `asset()`.
+
+
