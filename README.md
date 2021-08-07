@@ -33,3 +33,8 @@ Drop database with `symfony console d:d:d --force` in *dev* when you have a migr
 - `$userRepo = $em->getRepository('App:User');` (or `(User::class)` as argument);
 - `$user = $userRepo->find(2)` (to get the second user ie with `id` at 2);
 - `$user2 = $userRepo->findOneBy(['email' => 'johndoe@example.com']);`;
+
+Part 7
+------
+
+
