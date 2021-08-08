@@ -1,0 +1,57 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title 'Log in!' %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+            <form method="post">
+                <h1 class="mt-5 mb-3 text-center">Please sign in</h1>
+                <p class="mb-5 text-center text-muted">Your pins are waiting for you.</p>
+
+                {% if error %}
+                    <div class="alert alert-error rounded mb-3" role="alert">
+                        {{ error.messageKey|trans(error.messageData, 'security') }}
+                    </div>
+                {% endif %}
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" value="{{ last_username }}" name="email" id="email" class="form-control"
+                           autocomplete="email" required autofocus>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password" class="form-control"
+                           autocomplete="current-password" required>
+                </div>
+
+                {#
+                Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+                See https://symfony.com/doc/current/security/remember_me.html
+                #}
+                <div class="d-flex justify-content-between my-3">
+                    <div class="form-group">
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" name="_remember_me" id="remember_me">
+                            <label for="remember_me" class="form-check-label">
+                                Remember me
+                            </label>
+                        </div>
+                    </div>
+                    <a href="#">Forgot password?</a>
+                </div>
+
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                <button class="btn btn-primary col-12" type="submit">
+                    Sign in
+                </button>
+
+                <p class="mt-5 mb-3 text-center text-muted">Not registered yet? <a href="#">Create an account</p>
+
+            </form>
+        </div>
+    </div>
+{% endblock %}

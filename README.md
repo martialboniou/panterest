@@ -37,4 +37,14 @@ Drop database with `symfony console d:d:d --force` in *dev* when you have a migr
 Part 7
 ------
 
+Les authentifications sont gérées par des *firewalls* (`dev` a une `security: false` pour la *debug bar*, le *profiler*...).
 
+Rappel: `$request->query()` récupère le `GET`, `$request->request()` récupère le `POST`.
+
+Bonne idée: on peut ne pas renvoyer un message explicite "Pas de compte trouvée" parce que ça informe un *hacker* de l'existence ou non d'un compte.
+
+`$providerKey` dans la méthode `onAuthenticationSuccess()` de notre *authenticator* retourne le *firewall*.
+
+`start()` dans `AbstractFormLoginAuthenticator` permet de renvoyer un utilisateur vers la page de *login* non-autorisé (elle peut être *customisée*).
+
+`logout()` dans `SecurityController` n'est pas utilisé; elle est juste là pour définir une route. C'est le *firewall* qui gère (cf. `security.yaml`).

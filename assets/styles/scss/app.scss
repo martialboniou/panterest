@@ -25,17 +25,17 @@ section {
     border: none;
     border-radius: 0;
 
-    & .alert-success
+    &.alert-success
     {
         background-color: green;
     }
 
-    & .alert-info
+    &.alert-info
     {
         background-color: blue;
     }
 
-    & .alert-error
+    &.alert-error
     {
         background-color: red;
     }
