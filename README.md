@@ -48,3 +48,18 @@ Bonne idée: on peut ne pas renvoyer un message explicite "Pas de compte trouvé
 `start()` dans `AbstractFormLoginAuthenticator` permet de renvoyer un utilisateur vers la page de *login* non-autorisé (elle peut être *customisée*).
 
 `logout()` dans `SecurityController` n'est pas utilisé; elle est juste là pour définir une route. C'est le *firewall* qui gère (cf. `security.yaml`).
+
+Part 8
+------
+
+Préférez `symfony console` plutôt que `php bin/console`; les variables d'environnement ne seront pas uniquement les variables locales de votre `.env`; indispensable dans un *container* Docker.
+
+Pour accéder à l'utilisateur connecté hors contrôleur, injectez `Security` dans le constructeur de la classe pour l'attacher à une variable d'instance.
+
+Injectez `SlugInterface` lorsque vous avez besoin d'un *slug*.
+
+N'hésitez pas à utiliser `new EnglishInflector()` ou `new FrenchInflector()` pour singulariser certains mots.
+
+Dans le formulaire `RegistrationType`, il y a une méthode `configureOptions()`; elle s'assure que `data_class` est bien à la valeur de `User::class` (on n'aurait plus besoin donc de lier un `$user = new User()` à notre `createForm()` en second argument); c'est utile pour les formulaires imbriqués.
+
+NOTE: `RegistrationController::verifyUserEmail` should return a redirection to `app_home` on success (with the *success* flash).
