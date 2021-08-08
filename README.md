@@ -152,3 +152,8 @@ public function configureOptions(OptionsResolver $resolver): void
 ```
 
 Ensuite, on filtre pour ajouter au `$builder` les champs selon l'état de notre booléen (on peut *typer* l'option avec `$resolver->setAllowedTypes('current_password_is_required', 'bool');`).
+
+Part 11
+-------
+
+Utilisez un *EventSubscriber* pour gérer la génération d'un *flash* dans le cas du `logout()` qui est un méthode *vide* de routage gérée par le système d'Event Listeners de Symfony (ici, `Symfony\Component\Security\Http\Event\LogoutEvent`): on utilise la commande `symfony console make:subscriber`.
