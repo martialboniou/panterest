@@ -25,6 +25,7 @@
                         {{ pin.description }}
                     </p>
 
+                    {% if app.user == pin.user %}
                     <div class="pt-3">
                         <a href="{{ path('app_pins_edit', {id: pin.id}) }}" class="btn btn-light">Edit</a>
                         <a href="#" onclick="event.preventDefault(); confirm('Are you sure?') &&
@@ -35,6 +36,7 @@
                             <input type="hidden" name="_method" value="DELETE">
                         </form>
                     </div>
+                    {% endif %}
                 </div>
 
             </article>

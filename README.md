@@ -9,8 +9,12 @@ Part 1
 ### Conventions
 
 - les noms des chemins avec des *dashes*; les noms des `name` (*càd* des *paths*) avec des *underscores*;
-- utiliser les bonnes méthodes HTTP;
-- ...
+- utiliser les bonnes méthodes HTTP.
+
+### Notes importantes à propos de *Twig*
+
+- `~` pour concaténer;
+- `and` et `or` sont utilisés; **pas de** `&&` **et** `||`.
 
 Part 5
 ------
@@ -157,3 +161,5 @@ Part 11
 -------
 
 Utilisez un *EventSubscriber* pour gérer la génération d'un *flash* dans le cas du `logout()` qui est un méthode *vide* de routage gérée par le système d'Event Listeners de Symfony (ici, `Symfony\Component\Security\Http\Event\LogoutEvent`): on utilise la commande `symfony console make:subscriber`.
+
+Lorsqu'on utilise `isGranted()`, on fait appel au système de *Security Voters* de Symfony. Pour éviter la redondance dans le code, **il faut créer des Voters**: `symfony console make:voter`.

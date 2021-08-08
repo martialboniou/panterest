@@ -7,6 +7,7 @@ use App\Form\PinType;
 use App\Repository\PinRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,7 +23,11 @@ class PinsController extends AbstractController
             compact('pins'));
     }
 
+    //NOTE (previous code): @Security("is_granted('ROLE_USER') && user.isVerified()")
     #[Route('/pins/create', name: 'app_pins_create', methods: ['GET', 'POST'])]
+    /**
+     * @IsGranted("PIN_CREATE")
+     */
     public function create(
         Request $request,
         EntityManagerInterface $em,
@@ -58,7 +63,12 @@ class PinsController extends AbstractController
             compact('pin'));
     }
 
+    //NOTE (previous code): @Security("is_granted('ROLE_USER') && user.isVerified() && user == pin.getUser()")
+    //NOTE2 (other syntax): @IsGranted("PIN_MANAGE", subject="pin")
     #[Route('/pins/{id<[0-9]+>}/edit', name: 'app_pins_edit', methods: ['GET', 'PUT'])]
+    /**
+     * @Security("is_granted('PIN_MANAGE', pin)")
+     */
     public function edit(
         Pin $pin,
         Request $request,
@@ -84,6 +94,9 @@ class PinsController extends AbstractController
     }
 
     #[Route('/pins/{id<[0-9]+>}', name: 'app_pins_delete', methods: ['DELETE'])]
+    /**
+     * @Security("is_granted('PIN_MANAGE', pin)")
+     */
     public function delete(
         Pin $pin,
         Request $request,
