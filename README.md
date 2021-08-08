@@ -3,6 +3,15 @@ NOTES
 
 Based on [Créer un clone de Pinterest avec Symfony 5](https://www.youtube.com/watch?v=A8JxqOG2wi4&list=PLlxQJeQRaKDRs9WlWQiXNqWU0blyaZBzo&index=10) by *LES TEACHERS DU NET*; made with Symfony 5.2:
 
+Part 1
+------
+
+### Conventions
+
+- les noms des chemins avec des *dashes*; les noms des `name` (*càd* des *paths*) avec des *underscores*;
+- utiliser les bonnes méthodes HTTP;
+- ...
+
 Part 5
 ------
 
@@ -130,3 +139,16 @@ Les contraintes doivent être obligatoirement ajoutés au niveau du formulaire `
 Dans `ResetPasswordRequestFormType`, pensez à ajouter une contrainte sur l'`Email`. Notez que `$form->get('email')->getData()` est équivalent à `$form['email']->getData()`.
 
 `eraseCredentials()` dans `UserInterface` permet d'implémenter l'effacement d'informations sensibles stockés dans une entité (mais pas stocké en base).
+
+Nous pouvons choisir d'ajouter des champs à un formulaire qui ne sera pas actif par défaut et *forcer* leur utilisation dans certaines pages: `createForm(..., null, ['current_password_is_required' => true])` avec une option créée et passée en **troisième argument**. Pour celà, on ajoute dans le formulaire:
+
+```php
+public function configureOptions(OptionsResolver $resolver): void
+{
+  $resolver->setDefaults([
+    'current_password_is_required' => false,
+  ]);
+}
+```
+
+Ensuite, on filtre pour ajouter au `$builder` les champs selon l'état de notre booléen (on peut *typer* l'option avec `$resolver->setAllowedTypes('current_password_is_required', 'bool');`).
