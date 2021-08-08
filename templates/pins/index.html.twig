@@ -28,6 +28,16 @@
                     <p class="ps-3 pb-3 text-muted"><small>
                             Submitted by {{ pin.user.fullName }}
                         </small></p>
+                        {#
+                        <a href="#" onclick="event.preventDefault(); confirm('Are you sure?') &&
+        document.getElementById('js-pin-delete-form-{{ pin.id }}').submit();" class="m-3 btn btn-danger">&times; Delete</a>
+
+                        <form id="js-pin-delete-form-{{ pin.id }}" action="{{ path('app_pins_delete', {id: pin.id}) }}"
+                              method="POST" style="display:none;">
+                            <input type="text" name="csrf_token" value="{{ csrf_token('pin_deletion_' ~ pin.id) }}">
+                            <input type="hidden" name="_method" value="DELETE">
+                        </form>
+                        #}
                     </article>
                 </div>
             {% endfor %}

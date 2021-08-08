@@ -69,7 +69,9 @@ Part 9
 
 C'est une bonne idée d'écrire explicitement les types de champs dans les classes `*Type` de formulaire.
 
-Un ajout de la protection *CSRF* pour la déconnexion; vérifiez la configuration `symfony console config:dump security`; regarder les injections possibles au niveau du *token* (`symfony console autowiring token`):
+Un ajout de la protection *CSRF* pour la déconnexion; vérifiez la configuration `symfony console config:dump security`; regarder les injections possibles au niveau du *token* (`symfony console autowiring token`).
+
+Ajouter `methods="POST"` dans les options de `@Route` de `app_logout` (dans `SecurityController`) puis ajouter ces deux *snippets*:
 
 ```yaml
 # security.yaml
@@ -108,3 +110,14 @@ security:
     <input type="hidden" name="_csrf_token" value="{{ csrf_token('logout') }}">
 </form>
 ```
+
+La version `GET` consiste à changer l'action par `{{ path('app_logout') }}?_csrf_token={{ csrf_token('logout') }}`; on enlève donc le formulaire et on change le `href` pour la valeur précédemment citée pour l'action.
+
+Enfin, avec la même configuration `security.yaml` (important pour le `csrf_token_generator`), vous pouvez utiliser dans le `href`, `{{ logout_path('main') }}`: **cela ajoute automatiquement la validation CSRF en méthode** `GET`.
+
+Utilisez `DoctrineFixtureBundle` pour générer des *fixtures* (`foundry` ou `mockaroo`). `mockaroo` est utilisé dans la démo de l'application d'Honoré (`template`: champ libre, `sentences` pour former un titre (1 à 2), `paragraphs` pour former une *text area* (3 à 5)...).
+
+Ne pas surcharger `.env` et utiliser `services.yaml` pour mettre les paramètres globaux **qui ne changent pas d'une machine à une autre** (préfixés par `app.`), puis utilisez `$this->getParameter(...)` dans votre contrôleur.
+Une constante qui change peu peut aussi être définie dans une entité.
+
+Le système de gestion de secret de Symfony est à privilégier pour les **configurations sensibles**.
