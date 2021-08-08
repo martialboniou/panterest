@@ -63,3 +63,8 @@ N'hésitez pas à utiliser `new EnglishInflector()` ou `new FrenchInflector()` p
 Dans le formulaire `RegistrationType`, il y a une méthode `configureOptions()`; elle s'assure que `data_class` est bien à la valeur de `User::class` (on n'aurait plus besoin donc de lier un `$user = new User()` à notre `createForm()` en second argument); c'est utile pour les formulaires imbriqués.
 
 NOTE: `RegistrationController::verifyUserEmail` should return a redirection to `app_home` on success (with the *success* flash).
+
+Part 9
+------
+
+C'est une bonne idée d'écrire explicitement les types de champs dans les classes `*Type` de formulaire.
