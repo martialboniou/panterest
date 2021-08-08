@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\Security;
@@ -108,4 +109,23 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
     {
         return $this->urlGenerator->generate(self::LOGIN_ROUTE);
     }
+
+    /**
+     * Override to control what happens when the user hits a secure page
+     * but isn't logged in yet.
+     *
+     * @return RedirectResponse
+     */
+    public function start(Request $request, AuthenticationException $authException = null)
+    {
+        $request->getSession()->getFlashBag()->add(
+            'error',
+            'You need to log in first!'
+        );
+
+        $url = $this->getLoginUrl();
+
+        return new RedirectResponse($url);
+    }
+
 }

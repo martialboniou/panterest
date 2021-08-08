@@ -17,7 +17,7 @@ class LogoutEventSubscriber implements EventSubscriberInterface
     {
         $event->getRequest()->getSession()->getFlashBag()->add(
           'success',
-          'Logged out successfully!'
+          'Goodbye ' . $event->getToken()->getUser()->getFullName()
         );
 
         $event->setResponse(new RedirectResponse(
