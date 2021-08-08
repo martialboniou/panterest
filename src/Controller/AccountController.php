@@ -24,14 +24,16 @@ class AccountController extends AbstractController
         return $this->render('account/show.html.twig');
     }
 
-    #[Route('/edit', name: 'account_edit', methods: ['GET', 'POST'])]
+    #[Route('/edit', name: 'account_edit', methods: ['GET', 'PATCH'])]
     /**
      * @IsGranted("IS_AUTHENTICATED_FULLY")
      */
     public function edit(Request $request, EntityManagerInterface $em): Response
     {
         $user = $this->getUser();
-        $form = $this->createForm(UserFormType::class, $user);
+        $form = $this->createForm(UserFormType::class, $user, [
+            'method' => 'PATCH',
+        ]);
 
         $form->handleRequest($request);
 
@@ -51,7 +53,7 @@ class AccountController extends AbstractController
     /**
      * @IsGranted("IS_AUTHENTICATED_FULLY")
      */
-    #[Route('/change-password', name: 'account_change_password', methods: ['GET', 'POST'])]
+    #[Route('/change-password', name: 'account_change_password', methods: ['GET', 'PATCH'])]
     public function changePassword(
         Request                      $request,
         EntityManagerInterface       $em,
@@ -62,6 +64,7 @@ class AccountController extends AbstractController
 
         $form = $this->createForm(ChangePasswordFormType::class, null, [
             'current_password_is_required' => true,
+            'method' => 'PATCH',
         ]);
 
         $form->handleRequest($request);
