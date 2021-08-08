@@ -121,3 +121,12 @@ Ne pas surcharger `.env` et utiliser `services.yaml` pour mettre les paramètres
 Une constante qui change peu peut aussi être définie dans une entité.
 
 Le système de gestion de secret de Symfony est à privilégier pour les **configurations sensibles**.
+
+Part 10
+-------
+
+Les contraintes doivent être obligatoirement ajoutés au niveau du formulaire `*Type` **lorsqu'il n'y a pas de lien avec une entité**.
+
+Dans `ResetPasswordRequestFormType`, pensez à ajouter une contrainte sur l'`Email`. Notez que `$form->get('email')->getData()` est équivalent à `$form['email']->getData()`.
+
+`eraseCredentials()` dans `UserInterface` permet d'implémenter l'effacement d'informations sensibles stockés dans une entité (mais pas stocké en base).
