@@ -15,10 +15,11 @@ class SecurityController extends AbstractController
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
         // redirect to home if /login is demanded
-        if ($this->getUser()) {
+        // todo: use IS_REMEMBER to enable this (and avoid two messages from the AccountController's grant strategy)
+        /*if ($this->getUser()) {
             $this->addFlash('error', 'Already logged in!');
             return $this->redirectToRoute('app_home');
-        }
+        }*/
 
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();

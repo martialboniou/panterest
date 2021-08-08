@@ -163,3 +163,5 @@ Part 11
 Utilisez un *EventSubscriber* pour gérer la génération d'un *flash* dans le cas du `logout()` qui est un méthode *vide* de routage gérée par le système d'Event Listeners de Symfony (ici, `Symfony\Component\Security\Http\Event\LogoutEvent`): on utilise la commande `symfony console make:subscriber`.
 
 Lorsqu'on utilise `isGranted()`, on fait appel au système de *Security Voters* de Symfony. Pour éviter la redondance dans le code, **il faut créer des Voters**: `symfony console make:voter`.
+
+Vous devriez lire la page sur la sécurité et comprendre les `IS_AUTHENTICATED_FULLY`, `IS_IMPERSONATOR`, `IS_REMEMBERED`...
