@@ -68,3 +68,43 @@ Part 9
 ------
 
 C'est une bonne idée d'écrire explicitement les types de champs dans les classes `*Type` de formulaire.
+
+Un ajout de la protection *CSRF* pour la déconnexion; vérifiez la configuration `symfony console config:dump security`; regarder les injections possibles au niveau du *token* (`symfony console autowiring token`):
+
+```yaml
+# security.yaml
+security:
+    firewalls:
+    (...)
+        main:
+            anonymous: true
+            lazy: true
+            provider: app_user_provider
+            guard:
+                authenticators:
+                    - App\Security\LoginFormAuthenticator
+            logout:
+                # the UrlLogoutGenerator must implement this interface
+                csrf_token_generator: Symfony\Component\Security\Csrf\CsrfTokenManagerInterface
+                path: app_logout
+                # these two values are set by default (just here as documentation)
+                csrf_parameter: _csrf_token
+                csrf_token_id: logout
+                # where to redirect after logout
+                # target: app_any_route
+            remember_me:
+                secret: '%kernel.secret%'
+            switch_user: true
+```
+
+```twig
+{# navigation.html.twig #}
+<li class="nav-item">
+    <a class="nav-link" href="#"
+    onclick="event.preventDefault(); document.getElementById('js-logout-form').submit();"
+    >Logout</a>
+</li>
+<form id="js-logout-form" action="{{ path('app_logout') }}" method="POST" style="display: none;">
+    <input type="hidden" name="_csrf_token" value="{{ csrf_token('logout') }}">
+</form>
+```

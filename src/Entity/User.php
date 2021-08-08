@@ -32,7 +32,7 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=255, unique=true)
      * @Assert\NotBlank(message="Please enter your email address")
-     * @Assert\NotEmail(message="Please enter a valid email address")
+     * @Assert\Email(message="Please enter a valid email address")
      */
     private $email;
 
